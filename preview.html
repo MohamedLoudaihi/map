@@ -1,0 +1,96 @@
+<script>
+const map = L.map('map').setView([26.36,127.77], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19
+}).addTo(map);
+
+let currentMarker = null;
+let userMarker = null;
+
+/* STATUS */
+function setStatus(msg, cls="idle"){
+  const el = document.getElementById("statusMsg");
+  el.textContent = msg;
+  el.className = cls;
+}
+
+/* FIND BUILDING */
+function findBuilding(id){
+  id = id.toUpperCase().trim();
+
+  if(!DB[id]){
+    setStatus("BUILDING NOT FOUND", "err");
+    return;
+  }
+
+  const b = DB[id];
+
+  if(currentMarker) map.removeLayer(currentMarker);
+
+  currentMarker = L.marker([b.lat, b.lon]).addTo(map)
+    .bindPopup(`<div class="pi">
+      <div class="pi-num">${id}</div>
+      <div class="pi-name">${b.name || "Building"}</div>
+    </div>`).openPopup();
+
+  map.setView([b.lat, b.lon], 17);
+
+  setStatus(`LOCATED ${id}`, "ok");
+}
+
+/* BUTTON + INPUT */
+document.getElementById("findBtn").onclick = () => {
+  const val = document.getElementById("searchInput").value;
+  findBuilding(val);
+};
+
+document.getElementById("searchInput").addEventListener("keypress", e=>{
+  if(e.key === "Enter"){
+    findBuilding(e.target.value);
+  }
+});
+
+/* QUICK BUTTONS */
+function go(id){
+  document.getElementById("searchInput").value = id;
+  findBuilding(id);
+}
+
+/* GEOLOCATION */
+document.getElementById("locBtn").onclick = ()=>{
+  if(!navigator.geolocation){
+    setStatus("GEOLOCATION NOT SUPPORTED","err");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+
+    if(userMarker) map.removeLayer(userMarker);
+
+    userMarker = L.marker([lat, lon]).addTo(map)
+      .bindPopup("YOU ARE HERE").openPopup();
+
+    map.setView([lat, lon], 16);
+    setStatus("LOCATION ACQUIRED","ok");
+
+  }, ()=>{
+    setStatus("LOCATION FAILED","err");
+  });
+};
+
+/* OPTIONAL: preload markers (lightweight) */
+Object.keys(DB).forEach(k=>{
+  const b = DB[k];
+  L.circleMarker([b.lat, b.lon], {
+    radius: 3,
+    color: "#00ff41",
+    weight: 1,
+    fillOpacity: 0.5
+  }).addTo(map);
+});
+
+setStatus("READY","idle");
+</script>
