@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#163e3b" />
+    <meta name="description" content="Find gas stations in Okinawa and across Japan, compare community-reported fuel prices, and get Google Maps directions." />
+    <title>Fuel Finder · Okinawa & Japan</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body data-mobile-view="list">
+    <a class="skip-link" href="#filters">Skip to station search</a>
+    <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="icon-fuel" viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16M3 21h13M5 11h9M7 6h5v3H7zM15 11h1a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-4-4M18 5v4h3" /></symbol>
+      <symbol id="icon-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 4.5 4.5" /></symbol>
+      <symbol id="icon-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></symbol>
+      <symbol id="icon-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" /><circle cx="12" cy="12" r="2" /><path d="M12 2v3m0 14v3M2 12h3m14 0h3" /></symbol>
+      <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5.4 7a8 8 0 0 1 13.2-1L20 8M4 16l1.4 2A8 8 0 0 0 18.6 17" /></symbol>
+      <symbol id="icon-heart" viewBox="0 0 24 24"><path d="m12 21-8-8a5.7 5.7 0 0 1 8-8 5.7 5.7 0 0 1 8 8Z" /></symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" /></symbol>
+      <symbol id="icon-route" viewBox="0 0 24 24"><path d="m21 3-6 18-4-8-8-4Z" /></symbol>
+      <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 11v6m0-10v.1" /></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></symbol>
+      <symbol id="icon-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1" /></symbol>
+      <symbol id="icon-map" viewBox="0 0 24 24"><path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2Zm6-2v16m6-14v16" /></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6" /></symbol>
+      <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5" /></symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6" /></symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+    </svg>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="./" aria-label="Fuel Finder home">
+          <span class="brand-mark"><svg class="icon"><use href="#icon-fuel" /></svg></span>
+          <span class="brand-name">fuel finder<span class="brand-subtitle">OKINAWA &amp; JAPAN</span></span>
+        </a>
+        <nav class="header-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#explorer">Find fuel</a>
+          <button class="nav-link" id="guide-button" type="button">How it works <svg class="icon"><use href="#icon-info" /></svg></button>
+        </nav>
+        <div class="header-note"><span class="small-sun" aria-hidden="true">✳</span> A little further, for a little less.</div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> LESS SEARCHING. MORE EXPLORING.</div>
+          <h1 id="hero-title">Find your next <span>fill-up.</span></h1>
+          <p class="hero-description">Your next stop starts here. Find stations in Okinawa and across Japan, compare available fuel reports, and get there with Google Maps.</p>
+          <div class="hero-note"><svg class="icon"><use href="#icon-check" /></svg> Clear sources. No guessed prices.</div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg class="island-illustration" viewBox="0 0 400 245" xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="map-dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#8bad9a" opacity=".32" /></pattern></defs>
+            <rect x="8" y="10" width="376" height="224" rx="112" fill="#e4ece0" />
+            <rect x="8" y="10" width="376" height="224" rx="112" fill="url(#map-dots)" />
+            <path d="m73 227 43-41 14-35 31-8 31-43 42-17 23-47 43-22" stroke="#f7f7ed" stroke-width="22" fill="none" stroke-linejoin="round" />
+            <path d="m74 227 42-41 14-35 31-8 31-43 42-17 23-47 43-22" stroke="#c7d7bf" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="m66 86 59 15 56 40 55 5 57 32 59 10M106 37l22 72 48 35 14 64M276 74l-8 44-34 46-2 58" stroke="#f7f7ed" stroke-width="10" fill="none" stroke-linecap="round" />
+            <path d="m108 199 21-40 26-11 36-40 43-24 14-27" stroke="#d86b4a" stroke-width="3" stroke-dasharray="5 7" fill="none" stroke-linecap="round" />
+            <circle cx="108" cy="199" r="8" fill="#fffaf1" /><circle cx="108" cy="199" r="4" fill="#d86b4a" />
+            <circle cx="247" cy="57" r="27" fill="#163e3b" opacity=".09" />
+            <path d="M266 52c0 14-19 28-19 28s-19-14-19-28a19 19 0 1 1 38 0" fill="#163e3b" /><circle cx="247" cy="51" r="6" fill="#f9f7ed" />
+            <circle cx="333" cy="75" r="16" fill="#edd6a5" />
+            <path d="M341 180q9-6 18 0m-18 7q9-6 18 0M37 155q9-6 18 0m-18 7q9-6 18 0" stroke="#89a99e" stroke-width="2" fill="none" stroke-linecap="round" />
+          </svg>
+          <div class="art-caption"><span class="art-dot"></span> Okinawa first. All 47 prefectures.</div>
+        </div>
+      </section>
+
+      <section class="overview" aria-label="Current search overview">
+        <div class="stat-item"><div class="stat-label"><svg class="icon"><use href="#icon-fuel" /></svg> Lowest matching price</div><div class="stat-value" id="stat-cheapest">—</div><div class="stat-caption">Reported price per litre</div></div>
+        <div class="stat-item"><div class="stat-label"><svg class="icon"><use href="#icon-pin" /></svg> Matching price reports</div><div class="stat-value" id="stat-count">—</div><div class="stat-caption">With your current filters</div></div>
+        <div class="stat-item"><div class="stat-label"><svg class="icon"><use href="#icon-clock" /></svg> Snapshot collected</div><div class="stat-value stat-date" id="stat-updated">—</div><div class="stat-caption">Each report has its own date</div></div>
+        <div class="source-status"><span class="status-dot"></span><p id="data-status" role="status">Loading station locations…</p></div>
+      </section>
+
+      <section class="filter-panel" id="filters" aria-label="Filter gas stations">
+        <div class="filter-heading"><h2>Make it your next stop.</h2><span>Prices in Japanese yen · ¥ / L</span></div>
+        <div class="filter-grid">
+          <div class="field"><label for="prefecture">Prefecture</label><div class="select-wrap"><select id="prefecture"><option value="47">Okinawa / 沖縄県</option></select><svg class="icon"><use href="#icon-chevron" /></svg></div></div>
+          <div class="field"><label for="fuel">Fuel type</label><div class="select-wrap"><select id="fuel"><option value="regular">Regular / レギュラー</option><option value="premium">Premium / ハイオク</option><option value="diesel">Diesel / 軽油</option></select><svg class="icon"><use href="#icon-chevron" /></svg></div></div>
+          <div class="field"><label for="price-type">Price type</label><div class="select-wrap"><select id="price-type"><option value="all">All reported prices</option><option value="cash">Cash prices</option><option value="member">Member prices</option><option value="unknown">Payment not specified</option></select><svg class="icon"><use href="#icon-chevron" /></svg></div></div>
+          <div class="field"><label for="max-age">Price date within</label><div class="select-wrap"><select id="max-age"><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="all">Any time</option></select><svg class="icon"><use href="#icon-chevron" /></svg></div></div>
+        </div>
+        <div class="search-toolbar">
+          <div class="search-field"><svg class="icon"><use href="#icon-search" /></svg><label class="sr-only" for="search">Search station names or areas</label><input id="search" type="search" placeholder="Search a station, city, or area…" autocomplete="off" /></div>
+          <button class="button button-primary" id="locate-button" type="button"><svg class="icon"><use href="#icon-locate" /></svg> Near me</button>
+          <button class="button button-secondary" id="favorites-button" type="button" aria-pressed="false"><svg class="icon"><use href="#icon-heart" /></svg> Saved<span id="favorites-count" class="saved-count" hidden>0</span></button>
+          <button class="button button-icon" id="refresh-button" type="button" aria-label="Refresh station locations and prices" title="Refresh station locations and prices"><svg class="icon"><use href="#icon-refresh" /></svg></button>
+        </div>
+      </section>
+
+      <div class="error-banner" id="error-banner" role="alert" hidden></div>
+      <div class="explorer-heading"><div><h2>Find a station<span class="results-count" id="results-count">Loading…</span></h2><p id="results-subtitle">Choose a station to see its location and directions.</p></div><div class="sort-field"><label for="sort">Sort by</label><div class="select-wrap"><select id="sort"><option value="price">Lowest price</option><option value="distance">Nearest to me</option><option value="name">Station name</option></select><svg class="icon"><use href="#icon-chevron" /></svg></div></div></div>
+
+      <div class="mobile-view-toggle" aria-label="Results view"><button id="view-list" type="button" aria-pressed="true"><svg class="icon"><use href="#icon-list" /></svg> Stations</button><button id="view-map" type="button" aria-pressed="false"><svg class="icon"><use href="#icon-map" /></svg> Map</button></div>
+
+      <section class="explorer" id="explorer" aria-label="Station results and map">
+        <div class="results-panel" id="list-panel">
+          <div id="results-list" class="results-list" aria-label="Gas stations"></div>
+          <div class="empty-state" id="empty-state"><span class="empty-state-icon"><svg class="icon"><use href="#icon-fuel" /></svg></span><h3>Your next stop is on its way.</h3><p>We’re finding fuel stations for your selected prefecture. Available community reports will show a source and the time that fuel’s price was reported.</p></div>
+          <p class="results-footnote"><svg class="icon"><use href="#icon-info" /></svg> Prices can change. Check the time, price type, and station before filling up.</p>
+        </div>
+        <aside class="map-panel" id="map-panel" aria-label="Selected station map">
+          <div class="map-heading"><span><svg class="icon"><use href="#icon-map" /></svg> A look around</span><span class="map-provider">Google Maps <svg class="icon"><use href="#icon-external" /></svg></span></div>
+          <div class="map-canvas">
+            <iframe id="map-frame" title="Google Maps location of the selected gas station" src="about:blank" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <div class="map-state" id="map-state"><div class="map-placeholder-pattern" aria-hidden="true"><div class="map-placeholder-road road-one"></div><div class="map-placeholder-road road-two"></div><div class="map-placeholder-road road-three"></div><div class="placeholder-water"></div></div><span class="map-placeholder-pin"><svg class="icon"><use href="#icon-pin" /></svg></span><h3>A good journey starts with a stop.</h3><p>Select a station to see it on Google Maps.</p></div>
+          </div>
+          <div class="map-details" id="map-detail">
+            <div class="map-station-heading"><div><div class="eyebrow map-eyebrow">YOUR SELECTED STATION</div><h3 id="map-title">Where to next?</h3></div><div class="map-price" id="map-price">—</div></div>
+            <p id="map-address">Choose a station from the list to get started.</p>
+            <p class="map-report" id="map-report">No station selected</p>
+            <a class="button button-primary directions-button" id="map-directions" target="_blank" rel="noopener noreferrer" aria-disabled="true"><svg class="icon"><use href="#icon-route" /></svg> Get directions <svg class="icon"><use href="#icon-arrow" /></svg></a>
+            <a class="map-source" id="map-source" href="https://www.openstreetmap.org/" target="_blank" rel="noopener noreferrer">View station source <svg class="icon"><use href="#icon-external" /></svg></a>
+          </div>
+        </aside>
+      </section>
+
+      <section class="data-note" aria-label="About our fuel data"><div class="data-note-icon"><svg class="icon"><use href="#icon-info" /></svg></div><div><h3>Good information goes a long way.</h3><p>Reported prices come from GasMap; additional station locations come from OpenStreetMap. These are community reports, so check the fuel’s report time and confirm the price at the pump. An unavailable price means there’s no matching report.</p></div><span class="data-note-decoration" aria-hidden="true">✳</span></section>
+    </main>
+
+    <footer class="site-footer"><div class="footer-inner"><a class="footer-brand" href="./">fuel finder<span>Made for the road ahead.</span></a><div class="footer-links"><a href="https://gasmap.jp/okinawa" target="_blank" rel="noopener noreferrer">Price reports: GasMap <svg class="icon"><use href="#icon-external" /></svg></a><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a><a href="https://gogo.gs/" target="_blank" rel="noopener noreferrer">Check gogo.gs <svg class="icon"><use href="#icon-external" /></svg></a></div><span class="footer-note">Okinawa &amp; all of Japan</span></div></footer>
+
+    <dialog id="guide-dialog" class="guide-dialog" aria-labelledby="guide-title"><div class="dialog-header"><div><div class="eyebrow">A LITTLE CLARITY</div><h2 id="guide-title">Know before you go.</h2></div><button class="button button-icon" id="close-guide" type="button" aria-label="Close data guide"><svg class="icon"><use href="#icon-close" /></svg></button></div><div class="guide-content"><section><h3><svg class="icon"><use href="#icon-fuel" /></svg> Reported prices from GasMap</h3><p>Fuel prices are community-reported prices from GasMap, not live pump sensor readings. Every price has a source and its available timestamp. “Source updated” indicates the page update time when a fuel-specific report date is unavailable. A refreshed feed can still contain older prices; use “Price date within” to choose your freshness limit. Always confirm the price at the station.</p><p class="guide-feed-status" id="guide-feed-status">Checking the latest available price reports…</p></section><section><h3><svg class="icon"><use href="#icon-pin" /></svg> More stations from OpenStreetMap</h3><p>Additional station names, locations, and addresses come from community maintained OpenStreetMap data. Some stations or details may be missing or out of date. A station without a price can still be selected for directions.</p></section><section><h3><svg class="icon"><use href="#icon-check" /></svg> Cash and member prices differ</h3><p>Cash prices usually apply without a membership. Member prices may require a loyalty card, app, payment method, or other conditions. When a source does not specify a payment type, the report is marked “Payment not specified.” Cash or member filters hide those reports. Prices are in yen per litre.</p></section><section><h3><svg class="icon"><use href="#icon-route" /></svg> Your route, with Google Maps</h3><p>Select a station to load its map. “Get directions” opens Google Maps with that station as your destination. “Near me” uses your location, with your browser’s permission, to sort by distance; it is not uploaded to our own server.</p></section><section><h3><svg class="icon"><use href="#icon-heart" /></svg> Your saved stops stay with you</h3><p>Saved stations are stored in this browser. They do not sync between devices. If you clear browser storage, your saved stations will be cleared too.</p></section><p class="guide-links"><a href="https://gasmap.jp/okinawa" target="_blank" rel="noopener noreferrer">GasMap price reports</a><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap license</a><a href="https://gogo.gs/" target="_blank" rel="noopener noreferrer">Browse reports on gogo.gs</a></p></div></dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+  </body>
+</html>

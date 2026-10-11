@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-11T20:59:27Z",
+  "source": {
+    "name": "OpenStreetMap",
+    "url": "https://www.openstreetmap.org/copyright",
+    "license": "ODbL",
+    "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+    "retrievedVia": "Mapcarta OpenStreetMap feature pages",
+    "note": "Bootstrap sample of published OSM station facts, not a complete prefecture extract. Prices are not provided by this dataset."
+  },
+  "coverage": {
+    "prefectureCode": "47",
+    "kind": "bootstrap-sample",
+    "complete": false
+  },
+  "stations": [
+    {
+      "id": "osm-node-1993186255",
+      "name": "Kokuwa Enagey",
+      "nameJa": "コクワエナジー",
+      "address": "国道330号 27, 3丁目, 那覇市, 沖縄県 900-0025",
+      "prefectureCode": "47",
+      "latitude": 26.20661,
+      "longitude": 127.67992,
+      "brand": "Kokuwa",
+      "sourceUrl": "https://www.openstreetmap.org/node/1993186255",
+      "provenanceUrl": "https://mapcarta.com/N1993186255",
+      "prices": {}
+    },
+    {
+      "id": "osm-way-164306356",
+      "name": "SOLATO",
+      "address": "国道330号 22, 1, 那覇市, 沖縄県 900-0004",
+      "prefectureCode": "47",
+      "latitude": 26.22812,
+      "longitude": 127.70155,
+      "brand": "Taiyo Oil",
+      "sourceUrl": "https://www.openstreetmap.org/way/164306356",
+      "provenanceUrl": "https://mapcarta.com/W164306356",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885062996",
+      "name": "ENEOS Self Miyazato Elementary School Service Station",
+      "nameJa": "エネオス宮里小前SS",
+      "address": "沖縄県沖縄市宮里2-19-25, 904-2165",
+      "prefectureCode": "47",
+      "latitude": 26.33997,
+      "longitude": 127.82157,
+      "brand": "ENEOS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885062996",
+      "provenanceUrl": "https://mapcarta.com/N5885062996",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5413916623",
+      "name": "ENEOS BP Yomitan Nagahama SS",
+      "nameJa": "BP読谷長浜SS",
+      "address": "読谷村, 沖縄県",
+      "prefectureCode": "47",
+      "latitude": 26.41424,
+      "longitude": 127.73265,
+      "brand": "ENEOS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5413916623",
+      "provenanceUrl": "https://mapcarta.com/N5413916623",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-1993186327",
+      "name": "Okiryu Yaka Service Station",
+      "nameJa": "おきりゅう屋嘉SS",
+      "address": "国道329号 沖縄県国頭郡金武町屋嘉2634, 904-1203",
+      "prefectureCode": "47",
+      "latitude": 26.44172,
+      "longitude": 127.847,
+      "sourceUrl": "https://www.openstreetmap.org/node/1993186327",
+      "provenanceUrl": "https://mapcarta.com/N1993186327",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885018539",
+      "name": "ENEOS Kin SS",
+      "nameJa": "金武SS",
+      "address": "国道329号, 金武町, 904-1201",
+      "prefectureCode": "47",
+      "latitude": 26.45394,
+      "longitude": 127.9197,
+      "brand": "ENEOS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885018539",
+      "provenanceUrl": "https://mapcarta.com/N5885018539",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885062537",
+      "name": "JA Kushi Self Service Station",
+      "address": "名護市, 沖縄県 905-2266",
+      "prefectureCode": "47",
+      "latitude": 26.54968,
+      "longitude": 128.04914,
+      "brand": "JA-SS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885062537",
+      "provenanceUrl": "https://mapcarta.com/N5885062537",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-1993186218",
+      "name": "JA Kumiki Enobi Service Station",
+      "nameJa": "くみきえのびSS",
+      "address": "国道329号 沖縄県うるま市栄野比21, 904-2205",
+      "prefectureCode": "47",
+      "latitude": 26.3917,
+      "longitude": 127.83241,
+      "brand": "JA-SS",
+      "sourceUrl": "https://www.openstreetmap.org/node/1993186218",
+      "provenanceUrl": "https://mapcarta.com/N1993186218",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885062898",
+      "name": "ENEOS Okuma Service Station",
+      "nameJa": "エネオス奥間SS",
+      "address": "国道58号 沖縄県国頭郡国頭村半地344, 905-1414",
+      "prefectureCode": "47",
+      "latitude": 26.7257,
+      "longitude": 128.16407,
+      "brand": "ENEOS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885062898",
+      "provenanceUrl": "https://mapcarta.com/N5885062898",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885064090",
+      "name": "ENEOS Aha Service Station",
+      "nameJa": "エネオス安波SS",
+      "address": "県道70号 国頭郡国頭村安波273-2, 905-1504",
+      "prefectureCode": "47",
+      "latitude": 26.71585,
+      "longitude": 128.28603,
+      "brand": "ENEOS",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885064090",
+      "provenanceUrl": "https://mapcarta.com/N5885064090",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885049705",
+      "name": "Cosmo Yaese Service Station",
+      "nameJa": "コスモ八重瀬SS",
+      "address": "県道77号, 八重瀬町, 沖縄県",
+      "prefectureCode": "47",
+      "latitude": 26.15096,
+      "longitude": 127.71578,
+      "brand": "Cosmo",
+      "sourceUrl": "https://www.openstreetmap.org/node/5885049705",
+      "provenanceUrl": "https://mapcarta.com/N5885049705",
+      "prices": {}
+    },
+    {
+      "id": "osm-node-5885022106",
+      "name": "Esso BP Nago Service Station",
+      "address": "県道71号, 名護市, 沖縄県",
+      "prefectureCode": "47",
+      "latitude": 26.59023,
+      "longitude": 127.98554,
+      "sourceUrl": "https://www.openstreetmap.org/node/5885022106",
+      "provenanceUrl": "https://mapcarta.com/N5885022106",
+      "prices": {}
+    }
+  ]
+}
