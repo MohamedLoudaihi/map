@@ -15,6 +15,7 @@ SPEC = importlib.util.spec_from_file_location("refresh_prices", ROOT / "scripts/
 PRICES = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PRICES)
 FIXTURE = (ROOT / "tests/fixtures/gasmap_station.html").read_text(encoding="utf-8")
+LIVE_PRICE_TEXT = (ROOT / "tests/fixtures/gasmap_current_price_excerpt.txt").read_text(encoding="utf-8").strip()
 
 
 class PriceParserTests(unittest.TestCase):
@@ -35,6 +36,22 @@ class PriceParserTests(unittest.TestCase):
         premium = PRICES.parse_station(FIXTURE, "20437")["prices"]["premium"][0]
         self.assertEqual(premium["reportedAt"], "2026-10-03T09:30:00+09:00")
         self.assertEqual(premium["timestampKind"], "reported")
+
+    def test_actual_live_price_excerpt_with_split_decimal_spans(self):
+        # This bounded text was captured by the live GitHub Actions refresh,
+        # run38176139263, job114578821267. It reflects the provider's real
+        # visible price format without retaining the surrounding article.
+        start = FIXTURE.index("<section>")
+        end = FIXTURE.index("</section>", start) + len("</section>")
+        html = FIXTURE[:start] + "<section><h2>現在の価格</h2><p>" + LIVE_PRICE_TEXT + "</p></section>" + FIXTURE[end:]
+        station = PRICES.parse_station(html, "20437")
+        self.assertEqual({fuel: quotes[0]["yen"] for fuel, quotes in station["prices"].items()}, {"regular": 156, "premium": 167, "diesel": 147})
+        self.assertTrue(all(quotes[0]["timestampKind"] == "source-update" for quotes in station["prices"].values()))
+
+    def test_decimal_fraction_not_silently_dropped(self):
+        html = FIXTURE.replace("156.0円/L", "156 <span>.</span><span>5</span> 円/L")
+        quote = PRICES.parse_station(html, "20437")["prices"]["regular"][0]
+        self.assertEqual(quote["yen"], 156.5)
 
     def test_rejects_price_without_published_source_date(self):
         html = FIXTURE.replace("2026/10/10 21:00", "不明")

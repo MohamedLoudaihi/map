@@ -182,10 +182,12 @@ def parse_station(html, station_id):
     source_update = iso_timestamp(updates[-1]) if updates else None
     if not source_update:
         raise ValueError(f"{station_id}: missing published source update date")
-    matches = list(re.finditer(r"(レギュラー|ハイオク|軽油)\s*([0-9]{2,3}(?:\.[0-9]+)?)\s*円\s*/\s*[LlＬ]", current))
+    # GasMap renders the integer, decimal point and fractional digit in
+    # separate elements, so HTML text extraction yields "156 . 0 円/L".
+    matches = list(re.finditer(r"(レギュラー|ハイオク|軽油)\s*([0-9]{2,3}(?:\s*\.\s*[0-9]+)?)\s*円\s*/\s*[LlＬ]", current))
     prices = {}
     for index, match in enumerate(matches):
-        fuel, yen = match.group(1), float(match.group(2))
+        fuel, yen = match.group(1), float(re.sub(r"\s+", "", match.group(2)))
         if not 20 <= yen <= 400:
             raise ValueError(f"{station_id}: implausible price")
         row = current[match.end(): matches[index + 1].start() if index + 1 < len(matches) else len(current)]

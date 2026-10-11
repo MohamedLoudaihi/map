@@ -52,7 +52,7 @@ jobs:
         run: npm run build
       - name: Commit refreshed reports
         id: commit
-        if: steps.refresh.outputs.succeeded == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        if: steps.refresh.outputs.succeeded == 'true'
         run: |
           git -C .. add -- fuel/public/data/prices.json
           if git -C .. diff --cached --quiet -- fuel/public/data/prices.json; then
