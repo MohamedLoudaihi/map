@@ -1,0 +1,85 @@
+name: Refresh fuel prices
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'fuel/**'
+      - '.github/workflows/refresh-fuel.yml'
+  workflow_dispatch:
+  schedule:
+    # 06:15 Japan Standard Time. Scheduled runs can be delayed by GitHub.
+    - cron: '15 21 * * *'
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: refresh-fuel-prices
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: fuel
+        shell: bash
+    steps:
+      - name: Check out the published branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check filtering, routes, and feed parsing
+        run: npm test
+      - name: Refresh public price reports
+        id: refresh
+        run: |
+          if python3 scripts/refresh_prices.py; then
+            echo 'succeeded=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'succeeded=false' >> "$GITHUB_OUTPUT"
+            echo "::warning title=Price refresh unavailable::The committed price snapshot is retained. Check each report's original date in the app."
+          fi
+      - name: Validate the static site
+        run: npm run build
+      - name: Commit refreshed reports
+        id: commit
+        if: steps.refresh.outputs.succeeded == 'true' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        run: |
+          git -C .. add -- fuel/public/data/prices.json
+          if git -C .. diff --cached --quiet -- fuel/public/data/prices.json; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git -C .. config user.name 'github-actions[bot]'
+          git -C .. config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C .. commit -m 'Refresh Okinawa fuel price reports' -- fuel/public/data/prices.json
+          if ! git -C .. push origin HEAD:main; then
+            echo "::error title=Price snapshot not published::The branch changed or blocked the update. Run this workflow again; existing published data remains available."
+            exit 1
+          fi
+          echo 'changed=true' >> "$GITHUB_OUTPUT"
+      - name: Request the existing GitHub Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # GITHUB_TOKEN commits do not automatically trigger a branch-based
+          # Pages build, so request the existing publication explicitly.
+          # API documentation: https://docs.github.com/en/rest/pages/pages#request-a-github-pages-build
+          if ! gh api --method POST \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "repos/${GITHUB_REPOSITORY}/pages/builds" \
+            --jq '.status'; then
+            echo "::warning title=Pages rebuild unavailable::Updated reports were committed, but a Pages rebuild could not be requested. Check Settings > Pages and the pages build and deployment workflow."
+            exit 1
+          fi

@@ -15,10 +15,16 @@ export function validStation(s) {
 export function ageDays(date, now=Date.now()) {
   const time=Date.parse(date); return Number.isFinite(time) ? Math.max(0,(now-time)/86400000) : Infinity;
 }
+export function quoteAgeDays(quote,now=Date.now()) {
+  const publishedAge=ageDays(quote.reportedAt,now);
+  const relativeAge=Number.isFinite(quote.sourceAgeDays)&&quote.sourceAgeDays>=0?quote.sourceAgeDays:0;
+  const elapsed=quote.collectedAt&&Number.isFinite(Date.parse(quote.collectedAt))?ageDays(quote.collectedAt,now):0;
+  return Math.max(publishedAge,relativeAge+elapsed);
+}
 export function pickQuote(station, fuel, type='all', maxAge='14', now=Date.now()) {
   const raw=station.prices?.[fuel];
   const quotes=Array.isArray(raw)?raw:raw?[raw]:[];
-  const valid=quotes.filter(q=>q && typeof q.yen==='number' && Number.isFinite(q.yen) && q.yen>=20 && q.yen<=400 && typeof q.reportedAt==='string' && Number.isFinite(Date.parse(q.reportedAt)) && Date.parse(q.reportedAt)<=now+86400000 && (type==='all'||q.priceType===type) && (maxAge==='all'||ageDays(q.reportedAt,now)<=Number(maxAge)));
+  const valid=quotes.filter(q=>q && typeof q.yen==='number' && Number.isFinite(q.yen) && q.yen>=20 && q.yen<=400 && typeof q.reportedAt==='string' && Number.isFinite(Date.parse(q.reportedAt)) && Date.parse(q.reportedAt)<=now+86400000 && (type==='all'||q.priceType===type) && (maxAge==='all'||quoteAgeDays(q,now)<=Number(maxAge)));
   // Keep the newest quote of each payment type before comparing those types.
   const newest=new Map();
   for(const quote of valid) { const key=quote.priceType||'unknown'; if(!newest.has(key)||Date.parse(quote.reportedAt)>Date.parse(newest.get(key).reportedAt)) newest.set(key,quote); }

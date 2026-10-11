@@ -1,4 +1,4 @@
-import {PREFECTURES,FUEL_NAMES,safeUrl,ageDays,pickQuote,googleLinks,filterStations,mergeStations,overpassQuery,parseOverpass} from './core.mjs';
+import {PREFECTURES,FUEL_NAMES,safeUrl,ageDays,quoteAgeDays,pickQuote,googleLinks,filterStations,mergeStations,overpassQuery,parseOverpass} from './core.mjs';
 
 const $=id=>document.getElementById(id);
 const storage={get(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback;}catch{return fallback;}},set(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{}}};
@@ -105,11 +105,11 @@ function stationCard({station,quote,distance},minimum){
   const favorite=textNode('button',state.favorites.has(station.id)?'♥':'♡','favorite-button');favorite.type='button';favorite.setAttribute('aria-label',(state.favorites.has(station.id)?'Unsave ':'Save ')+station.name);favorite.setAttribute('aria-pressed',String(state.favorites.has(station.id)));favorite.addEventListener('click',()=>{if(state.favorites.has(station.id))state.favorites.delete(station.id);else state.favorites.add(station.id);storage.set('fuel-finder-favorites',[...state.favorites]);render();});top.append(favorite);card.append(top);
   const name=textNode('button',station.name,'station-name');name.type='button';name.setAttribute('aria-label','Show '+station.name+' on map');name.addEventListener('click',()=>{state.selectedId=station.id;render();});card.append(name,textNode('p',station.address||'Address not listed','station-address'));
   const mid=textNode('div','','station-meta');
-  const price=textNode('div','','station-price');price.append(textNode('strong',priceLabel(quote)),textNode('span',quote?' / L':' Price unavailable'));if(quote&&ageDays(quote.reportedAt)>7)price.classList.add('is-old');mid.append(price);
+  const price=textNode('div','','station-price');price.append(textNode('strong',priceLabel(quote)),textNode('span',quote?' / L':' Price unavailable'));if(quote&&quoteAgeDays(quote)>7)price.classList.add('is-old');mid.append(price);
   if(distance!==null)mid.append(textNode('span',`${distance<1?distance.toFixed(1):distance.toFixed(0)} km · straight-line`,'station-distance'));card.append(mid);
   const footer=textNode('div','','station-footer');
   const info=textNode('div','','station-report');
-  if(quote){info.append(textNode('span',paymentLabel(quote)),textNode('span',`${quote.timestampKind==='source-update'?'Source updated':'Reported'} ${formatTime(quote.reportedAt)}${ageDays(quote.reportedAt)>7?' · older report':''}`));}else{const raw=pickQuote(station,state.fuel,'all','all');info.append(textNode('span',raw?'No price matches these filters':'No published '+FUEL_NAMES[state.fuel].toLowerCase()+' price'),textNode('span',raw?'Try a longer age limit or all payment types.':'Check the price source before travelling.'));}footer.append(info);
+  if(quote){info.append(textNode('span',paymentLabel(quote)),textNode('span',`${quote.timestampKind==='source-update'?'Source updated':'Reported'} ${formatTime(quote.reportedAt)}${quoteAgeDays(quote)>7?' · older report':''}`));}else{const raw=pickQuote(station,state.fuel,'all','all');info.append(textNode('span',raw?'No price matches these filters':'No published '+FUEL_NAMES[state.fuel].toLowerCase()+' price'),textNode('span',raw?'Try a longer age limit or all payment types.':'Check the price source before travelling.'));}footer.append(info);
   const actions=textNode('div','','station-actions');const route=textNode('a','Directions ↗','directions-link');route.href=googleLinks(station,state.location).directions;route.target='_blank';route.rel='noopener noreferrer';actions.append(route);footer.append(actions);card.append(footer);return card;
 }
 function renderMap(row){
