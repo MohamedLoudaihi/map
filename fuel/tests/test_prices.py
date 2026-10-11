@@ -53,6 +53,16 @@ class PriceParserTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "current price"):
             PRICES.parse_station(html, "20437")
 
+    def test_missing_quotes_emit_bounded_price_section_diagnostic(self):
+        html = FIXTURE.replace("円/L", "unrecognized-unit")
+        with self.assertRaises(ValueError) as failure:
+            PRICES.parse_station(html, "20437")
+        message = str(failure.exception)
+        self.assertIn("current-price excerpt:", message)
+        self.assertIn("156.0", message)
+        self.assertNotIn("別店舗", message)
+        self.assertLess(len(message), 380)
+
     def test_failed_second_station_keeps_existing_snapshot_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as folder:
             output = Path(folder) / "prices.json"

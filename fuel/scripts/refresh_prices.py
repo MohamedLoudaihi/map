@@ -200,7 +200,10 @@ def parse_station(html, station_id):
             quote["collectedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
         prices[FUELS[fuel]] = [quote]
     if not prices:
-        raise ValueError(f"{station_id}: no current fuel prices")
+        # Bounded public price-section text helps diagnose provider markup
+        # changes in Actions without logging the full page or article content.
+        excerpt = current[:300]
+        raise ValueError(f"{station_id}: no current fuel prices; current-price excerpt: {excerpt!r}")
     station = {"id": f"gasmap-{station_id}", "name": name, "address": address, "prefectureCode": "47",
                "latitude": coords[0], "longitude": coords[1], "sourceUrl": source_url, "prices": prices}
     return station
