@@ -1,76 +1,158 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T20:59:03Z",
+  "generatedAt": "2026-10-11T21:25:04Z",
   "source": {
     "name": "GasMap",
     "url": "https://gasmap.jp",
     "termsUrl": "https://gasmap.jp/terms",
     "kind": "public-station-price-facts",
-    "retrievedVia": "Verified public station pages",
-    "timestampNote": "Source update timestamps are not independently verified pump observation times. Payment conditions are not specified."
+    "retrievedVia": "Public station HTML",
+    "timestampNote": "Source update dates may differ from fuel observation times; payment conditions unspecified."
   },
-  "coverage": ["47"],
+  "coverage": [
+    "47"
+  ],
   "stations": [
     {
       "id": "gasmap-20437",
-      "name": "EneJet Uema SS",
-      "nameJa": "ENEOS EneJet 上間SS／エッカ石油（株）",
-      "brand": "ENEOS",
-      "address": "沖縄県那覇市上間165-6",
+      "name": "ENEOS EneJet 上間SS／エッカ石油（株）",
+      "address": "沖縄県 那覇市 那覇市上間１６５−６",
       "prefectureCode": "47",
       "latitude": 26.1983999,
       "longitude": 127.7123084,
       "sourceUrl": "https://gasmap.jp/stations/20437",
       "prices": {
-        "regular": [{"yen":156,"reportedAt":"2026-10-10T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20437"}],
-        "premium": [{"yen":167,"reportedAt":"2026-10-10T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20437"}],
-        "diesel": [{"yen":147,"reportedAt":"2026-10-10T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20437"}]
+        "regular": [
+          {
+            "yen": 156,
+            "reportedAt": "2026-10-10T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20437"
+          }
+        ],
+        "premium": [
+          {
+            "yen": 167,
+            "reportedAt": "2026-10-10T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20437"
+          }
+        ],
+        "diesel": [
+          {
+            "yen": 147,
+            "reportedAt": "2026-10-10T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20437",
+            "sourceAgeDays": 1,
+            "collectedAt": "2026-10-11T21:24:56Z"
+          }
+        ]
       }
     },
     {
       "id": "gasmap-20465",
-      "name": "Okinawa Koyu SS",
-      "nameJa": "ENEOS 沖縄港油給油所／（有）沖縄港油",
-      "brand": "ENEOS",
-      "address": "沖縄県那覇市西2-11-1",
+      "name": "ENEOS 沖縄港油給油所／（有）沖縄港油",
+      "address": "沖縄県 那覇市 那覇市西２丁目１１−１",
       "prefectureCode": "47",
       "latitude": 26.2125205,
       "longitude": 127.6691742,
       "sourceUrl": "https://gasmap.jp/stations/20465",
       "prices": {
-        "regular": [{"yen":182,"reportedAt":"2026-10-02T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20465"}],
-        "diesel": [{"yen":165,"reportedAt":"2026-10-02T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20465"}]
+        "regular": [
+          {
+            "yen": 182,
+            "reportedAt": "2026-10-02T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20465"
+          }
+        ],
+        "diesel": [
+          {
+            "yen": 165,
+            "reportedAt": "2026-10-02T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20465",
+            "sourceAgeDays": 9,
+            "collectedAt": "2026-10-11T21:24:58Z"
+          }
+        ]
       }
     },
     {
       "id": "gasmap-20414",
-      "name": "JA-SS Toyomi Self SS",
-      "nameJa": "JA-SS とよみセルフSS／（株）JAおきなわSS",
-      "brand": "JA-SS",
-      "address": "沖縄県豊見城市高安1171-1",
+      "name": "JA-SS とよみセルフSS／（株）JAおきなわSS",
+      "address": "沖縄県 豊見城市 豊見城市高安１１７１−１",
       "prefectureCode": "47",
       "latitude": 26.1866201,
       "longitude": 127.6877058,
       "sourceUrl": "https://gasmap.jp/stations/20414",
       "prices": {
-        "regular": [{"yen":156,"reportedAt":"2026-09-20T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20414"}],
-        "premium": [{"yen":167,"reportedAt":"2026-09-20T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20414"}],
-        "diesel": [{"yen":149,"reportedAt":"2026-09-20T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20414"}]
+        "regular": [
+          {
+            "yen": 156,
+            "reportedAt": "2026-09-20T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20414"
+          }
+        ],
+        "premium": [
+          {
+            "yen": 167,
+            "reportedAt": "2026-09-20T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20414"
+          }
+        ],
+        "diesel": [
+          {
+            "yen": 149,
+            "reportedAt": "2026-09-20T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20414",
+            "sourceAgeDays": 21,
+            "collectedAt": "2026-10-11T21:25:01Z"
+          }
+        ]
       }
     },
     {
       "id": "gasmap-20433",
-      "name": "JA-SS Osato Hokubu SS",
-      "nameJa": "JA-SS 大里北部SS／（株）JAおきなわSS",
-      "brand": "JA-SS",
-      "address": "沖縄県南城市大里古堅1190-1",
+      "name": "JA-SS 大里北部SS／（株）JAおきなわSS",
+      "address": "沖縄県 南城市 南城市大里古堅１１９０−１",
       "prefectureCode": "47",
       "latitude": 26.1959717,
       "longitude": 127.7461388,
       "sourceUrl": "https://gasmap.jp/stations/20433",
       "prices": {
-        "regular": [{"yen":156,"reportedAt":"2026-10-05T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20433"}],
-        "diesel": [{"yen":147,"reportedAt":"2026-10-05T21:00:00+09:00","timestampKind":"source-update","priceType":"unknown","sourceUrl":"https://gasmap.jp/stations/20433"}]
+        "regular": [
+          {
+            "yen": 156,
+            "reportedAt": "2026-10-05T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20433"
+          }
+        ],
+        "diesel": [
+          {
+            "yen": 147,
+            "reportedAt": "2026-10-05T21:00:00+09:00",
+            "timestampKind": "source-update",
+            "priceType": "unknown",
+            "sourceUrl": "https://gasmap.jp/stations/20433",
+            "sourceAgeDays": 6,
+            "collectedAt": "2026-10-11T21:25:04Z"
+          }
+        ]
       }
     }
   ]
