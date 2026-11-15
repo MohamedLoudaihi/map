@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T01:26:00Z",
+  "generatedAt": "2026-11-15T00:59:52Z",
   "source": {
     "name": "GasMap",
     "url": "https://gasmap.jp",
@@ -76,8 +76,8 @@
             "timestampKind": "source-update",
             "priceType": "unknown",
             "sourceUrl": "https://gasmap.jp/stations/20465",
-            "sourceAgeDays": 17,
-            "collectedAt": "2026-11-14T01:25:55Z"
+            "sourceAgeDays": 18,
+            "collectedAt": "2026-11-15T00:59:47Z"
           }
         ]
       }
@@ -116,8 +116,8 @@
             "timestampKind": "source-update",
             "priceType": "unknown",
             "sourceUrl": "https://gasmap.jp/stations/20414",
-            "sourceAgeDays": 17,
-            "collectedAt": "2026-11-14T01:25:58Z"
+            "sourceAgeDays": 18,
+            "collectedAt": "2026-11-15T00:59:50Z"
           }
         ]
       }
